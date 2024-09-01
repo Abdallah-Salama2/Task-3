@@ -82,6 +82,8 @@ Route::get('/stats', [StatsController::class, 'index']);
 php artisan make:observer UserStatsObserver --model=User
 php artisan make:observer PostStatsObserver --model=Post
 ```
+- Implement the logic in Observers.
+- Register observers in `AppServiceProvider`.
 
 ## All Routes
 
