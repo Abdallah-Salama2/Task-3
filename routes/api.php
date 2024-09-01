@@ -18,33 +18,40 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
 //3.a. /register endpoint that receives and validates the following:
 Route::post("register",[AuthController::class,"register"]);
+
 //3.b. /login endpoint.
 Route::post("login",[AuthController::class,"login"]);
 
 //3.f. Make an endpoint that verifies the code sent to the user.
 Route::post('/verify', [AuthController::class, 'verify']);
 
+//8- Make /stats API endpoint.
 Route::get('/stats', [StatsController::class, 'index']);
-Route::get('/test', [StatsController::class, 'test']);
+
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
     //4- Create tags API resource.
     Route::resource('tags',TagController::class)->only(["index","store","update","destroy"]);
+
     //5- Create posts API resource.
     Route::resource('posts',PostController::class);
+
+    //5.f. Authenticated users can view their deleted posts.
     Route::get("deletedPosts",[PostController::class,"softDeletedPosts"]);
+
+    //5.g. Authenticated users can restore one of their deleted posts.
     Route::post("posts/restore/{post}",[PostController::class,"restore"]);
+
+    //Route to pin posts
     Route::post("posts/pin/{post}",[PostController::class,"pin"]);
 
-    //    Route::resources([
-//        'tags' => TagController::class,
-//        'posts' => PostController::class,
-//    ]);
+
 });
+// test route to test jobs logic
+Route::get('/test', [StatsController::class, 'test']);
+
