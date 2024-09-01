@@ -32,6 +32,7 @@ DB_CONNECTION=sqlite
 composer require laravel/sanctum
 php artisan make:controller Api/AuthController
 ```
+- Implement the logic in the `AuthController`.
 
 ## 4- Create Tags API Resource
 
