@@ -80,4 +80,3 @@ php artisan make:observer PostStatsObserver --model=Post
 ```
 ```
 
-This content is now properly formatted in Markdown syntax.# Task-3
